@@ -86,17 +86,17 @@ end
 
 CSV.foreach(csv_file_name, encoding: 'bom|utf-16le', headers: true) do |row|
   # If there is no reply - push this review
-  if row[11].nil?
+  if row[12].nil? #Developer Reply Date and Time
     Review.collection << Review.new({
-      text: row[10],
-      title: row[9],
-      submitted_at: row[6],
-      edited: (row[4] != row[6]),
-      original_subitted_at: row[4],
-      rate: row[8],
-      device: row[3],
-      url: row[14],
-      version: row[1],
+      text: row[11], #Review Text
+      title: row[10], #Review Title
+      submitted_at: row[7], #Review Last Update Date and Time
+      edited: (row[5] != row[7]), #Review Submit Date and Time & Review Last Update Date and Time
+      original_subitted_at: row[5], #Review Submit Date and Time
+      rate: row[9], #Star Rating
+      device: row[4], #Device
+      url: row[15], #Review Link
+      version: row[1], #App Version Code
     })
   end
 end
